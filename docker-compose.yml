@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=syedamim
+      - POSTGRES_PASSWORD=syedamim9876
+      - POSTGRES_DB=pghandle
+    ports:
+      - 5112:5432
