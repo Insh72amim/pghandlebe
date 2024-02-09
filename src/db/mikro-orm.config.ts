@@ -10,6 +10,10 @@ const config: Options = {
   debug: process.env.LOG_LEVEL === 'debug',
   logger: (msg) => new Logger('MikroORM').log(msg),
   highlighter: process.env.LOG_FORMAT === 'pretty' ? new SqlHighlighter() : undefined,
+  migrations: {
+    path: './src/db/migrations',
+    disableForeignKeys: false,
+  },
   seeder: {
     path: '',
     defaultSeeder: '',

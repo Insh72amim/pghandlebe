@@ -1,6 +1,6 @@
 import { Entity, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TOwner } from '../types/entity';
+import { TGuest } from '../types/entity';
 import { Address } from './address.entity';
 import { Bed } from './bed.entity';
 import { Stay } from './stay.entity';
@@ -16,19 +16,16 @@ export class Guest extends BaseEntity {
   @Property()
   mobileNumber!: string;
 
-  @Property()
+  @OneToOne(() => Address)
   homeAddress!: Address;
 
-  @Property()
-  workAddress!: Address;
-
-  @OneToOne()
+  @OneToOne(() => Bed, (bed) => bed.guest, { owner: false })
   bed!: Bed;
 
-  @OneToOne()
+  @OneToOne(() => Stay, (stay) => stay.guest, { owner: false })
   stay!: Stay;
 
-  constructor(args: TOwner) {
+  constructor(args: TGuest) {
     super();
     Object.assign(this, args);
   }

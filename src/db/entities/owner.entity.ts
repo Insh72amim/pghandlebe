@@ -1,4 +1,4 @@
-import { Collection, Entity, OneToMany, Property } from '@mikro-orm/core';
+import { Collection, Entity, OneToMany, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
 import { TOwner } from '../types/entity';
 import { Address } from './address.entity';
@@ -18,10 +18,10 @@ export class Owner extends BaseEntity {
   @Property()
   mobileNumber!: string;
 
-  @Property()
+  @OneToOne(() => Address, { owner: false })
   address!: Address;
 
-  @OneToMany(() => PG, (pg) => pg.id)
+  @OneToMany(() => PG, (pg) => pg.owner)
   pgs = new Collection<PG>(this);
 
   constructor(args: TOwner) {

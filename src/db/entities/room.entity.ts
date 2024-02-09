@@ -1,6 +1,6 @@
 import { Collection, Entity, ManyToOne, OneToMany, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TPG } from '../types/entity';
+import { TRoom } from '../types/entity';
 import { PG } from './pg.entity';
 import { Bed } from './bed.entity';
 
@@ -15,16 +15,16 @@ export class Room extends BaseEntity {
   @Property()
   block!: number;
 
-  @ManyToOne()
-  pg!: PG;
-
   @Property()
   isAirConditioned!: boolean;
 
-  @OneToMany(() => Bed, (bed) => bed.id)
+  @ManyToOne(() => PG)
+  pg!: PG;
+
+  @OneToMany(() => Bed, (bed) => bed.room)
   beds = new Collection<Bed>(this);
 
-  constructor(args: TPG) {
+  constructor(args: TRoom) {
     super();
     Object.assign(this, args);
   }

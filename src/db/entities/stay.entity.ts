@@ -1,10 +1,8 @@
-import { Collection, Entity, ManyToOne, OneToMany, OneToOne, Property } from '@mikro-orm/core';
+import { Entity, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TPG } from '../types/entity';
-import { PG } from './pg.entity';
+import { TStay } from '../types/entity';
 import { Bed } from './bed.entity';
 import { Guest } from './guest.entity';
-import { Room } from './room.entity';
 
 @Entity({ tableName: 'Stay' })
 export class Stay extends BaseEntity {
@@ -21,18 +19,18 @@ export class Stay extends BaseEntity {
   latestPaymentDate: Date;
 
   @Property()
+  isActive: boolean;
+
+  @Property()
   reccuringDaysForPayment: number;
 
-  @OneToOne()
+  @OneToOne(() => Guest)
   guest: Guest;
 
-  @OneToOne()
+  @OneToOne(() => Bed)
   bed: Bed;
 
-  @ManyToOne()
-  room: Room;
-
-  constructor(args: TPG) {
+  constructor(args: TStay) {
     super();
     Object.assign(this, args);
   }

@@ -19,13 +19,13 @@ export class PG extends BaseEntity {
   @Property()
   totalRooms!: number;
 
-  @ManyToOne()
+  @ManyToOne(() => Owner)
   owner!: Owner;
 
-  @OneToOne()
+  @OneToOne(() => Amenity)
   amenity!: Amenity;
 
-  @OneToMany(() => Room, (room) => room.id)
+  @OneToMany(() => Room, (room) => room.pg)
   rooms = new Collection<Room>(this);
 
   constructor(args: TPG) {

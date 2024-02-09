@@ -1,7 +1,6 @@
-import { Entity, OneToOne, Property } from '@mikro-orm/core';
+import { Entity, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TPG } from '../types/entity';
-import { PG } from './pg.entity';
+import { TAmenity } from '../types/entity';
 
 // General Amenities available in a PG
 // Specific to PG and not bounded to any room
@@ -38,10 +37,7 @@ export class Amenity extends BaseEntity {
   @Property()
   carParking: boolean;
 
-  @OneToOne()
-  PG: PG;
-
-  constructor(args: TPG) {
+  constructor(args: TAmenity) {
     super();
     Object.assign(this, args);
   }
