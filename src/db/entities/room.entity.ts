@@ -1,6 +1,6 @@
 import { Collection, Entity, ManyToOne, OneToMany, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TRoom } from '../types/entity';
+import { TRoom } from '../types/entity.types';
 import { PG } from './pg.entity';
 import { Bed } from './bed.entity';
 

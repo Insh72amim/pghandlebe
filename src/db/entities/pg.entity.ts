@@ -1,7 +1,7 @@
 import { Collection, Entity, ManyToOne, OneToMany, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
 import { Owner } from './owner.entity';
-import { TPG } from '../types/entity';
+import { TPG } from '../types/entity.types';
 import { Amenity } from './amenity.entity';
 import { Room } from './room.entity';
 
@@ -22,7 +22,7 @@ export class PG extends BaseEntity {
   @ManyToOne(() => Owner)
   owner!: Owner;
 
-  @OneToOne(() => Amenity)
+  @OneToOne(() => Amenity, { mappedBy: 'pg' })
   amenity!: Amenity;
 
   @OneToMany(() => Room, (room) => room.pg)

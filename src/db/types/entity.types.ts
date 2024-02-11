@@ -19,11 +19,11 @@ export enum ENTITIES {
 }
 
 export type TGuest = Omit<Guest, 'id' | 'createdAt' | 'updatedAt'>;
-export type TOwner = Omit<Owner, 'id' | 'createdAt' | 'updatedAt'>;
+export type TOwner = Omit<Owner, 'id' | 'createdAt' | 'updatedAt' | 'pgs'>;
 
-export type TPG = Omit<PG, 'id' | 'createdAt' | 'updatedAt'>;
-export type TRoom = Omit<Room, 'id' | 'createdAt' | 'updatedAt'>;
-export type TBed = Omit<Bed, 'id' | 'createdAt' | 'updatedAt'>;
+export type TPG = Omit<PG, 'id' | 'createdAt' | 'updatedAt' | 'rooms'>;
+export type TRoom = Omit<Room, 'id' | 'createdAt' | 'updatedAt' | 'beds'>;
+export type TBed = Omit<Bed, 'id' | 'createdAt' | 'updatedAt' | 'guest' | 'currentStay'>;
 
 export type TAddress = Omit<Address, 'id' | 'createdAt' | 'updatedAt'>;
 export type TAmenity = Omit<Amenity, 'id' | 'createdAt' | 'updatedAt'>;

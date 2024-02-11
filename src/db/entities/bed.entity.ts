@@ -1,6 +1,6 @@
 import { Entity, ManyToOne, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TBed } from '../types/entity';
+import { TBed } from '../types/entity.types';
 import { Room } from './room.entity';
 import { Guest } from './guest.entity';
 import { Stay } from './stay.entity';
@@ -16,9 +16,6 @@ export class Bed extends BaseEntity {
 
   @ManyToOne(() => Room)
   room!: Room;
-
-  @ManyToOne(() => PG)
-  pg!: PG;
 
   @OneToOne(() => Guest, (guest) => guest.bed, { owner: true, mappedBy: 'bed' })
   guest: Guest;

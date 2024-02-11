@@ -1,11 +1,14 @@
 import { Entity, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TAddress } from '../types/entity';
+import { TAddress } from '../types/entity.types';
 
 @Entity({ tableName: 'Address' })
 export class Address extends BaseEntity {
   @Property()
   identity!: string; // referenced to entity for which it is addressed like pg or owner or manager
+
+  @Property()
+  identityId!: string; // uuid in respective table
 
   @Property()
   addressLine1!: string;

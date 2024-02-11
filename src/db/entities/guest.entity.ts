@@ -1,6 +1,6 @@
 import { Entity, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TGuest } from '../types/entity';
+import { TGuest } from '../types/entity.types';
 import { Address } from './address.entity';
 import { Bed } from './bed.entity';
 import { Stay } from './stay.entity';

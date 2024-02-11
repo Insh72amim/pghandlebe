@@ -1,6 +1,6 @@
 import { Collection, Entity, OneToMany, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TOwner } from '../types/entity';
+import { TOwner } from '../types/entity.types';
 import { Address } from './address.entity';
 import { PG } from './pg.entity';
 

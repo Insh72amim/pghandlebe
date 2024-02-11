@@ -1,12 +1,16 @@
-import { Entity, Property } from '@mikro-orm/core';
+import { Entity, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
-import { TAmenity } from '../types/entity';
+import { TAmenity } from '../types/entity.types';
+import { PG } from './pg.entity';
 
 // General Amenities available in a PG
 // Specific to PG and not bounded to any room
 
 @Entity({ tableName: 'Amenity' })
 export class Amenity extends BaseEntity {
+  @OneToOne(() => PG, (pg) => pg.amenity, { owner: true })
+  pg!: PG;
+
   @Property()
   food: boolean;
 
@@ -20,7 +24,7 @@ export class Amenity extends BaseEntity {
   washingMachine: boolean;
 
   @Property()
-  regfrigerator: boolean;
+  refrigerator: boolean;
 
   @Property()
   airConditioned: boolean;
