@@ -1,6 +1,6 @@
-import { BaseEntity } from '@mikro-orm/core';
 import { Address } from '../entities/address.entity';
 import { Amenity } from '../entities/amenity.entity';
+import { BaseEntity } from '../entities/base.entity';
 import { Bed } from '../entities/bed.entity';
 import { Guest } from '../entities/guest.entity';
 import { Owner } from '../entities/owner.entity';
@@ -19,15 +19,17 @@ export enum ENTITIES {
   Stay = 'Stay',
 }
 
-export type TGuest = Omit<Guest, 'id' | 'createdAt' | 'updatedAt'>;
+export type WithoutBase<T extends BaseEntity> = Partial<T> & Omit<BaseEntity, 'id' | 'createdAt' | 'updatedAt'>;
+
+export type TGuest = WithoutBase<Guest>;
 export type TOwner = Omit<Owner, 'id' | 'createdAt' | 'updatedAt' | 'pgs'>;
 
 export type TPG = Omit<PG, 'id' | 'createdAt' | 'updatedAt' | 'rooms'>;
 export type TRoom = Omit<Room, 'id' | 'createdAt' | 'updatedAt' | 'beds'>;
 export type TBed = Omit<Bed, 'id' | 'createdAt' | 'updatedAt' | 'guest' | 'currentStay'>;
 
-export type TAddress = Omit<Address, 'id' | 'createdAt' | 'updatedAt'>;
-export type TAmenity = Omit<Amenity, 'id' | 'createdAt' | 'updatedAt'>;
-export type TStay = Omit<Stay, 'id' | 'createdAt' | 'updatedAt'>;
+export type TAddress = WithoutBase<Address>;
+export type TAmenity = WithoutBase<Amenity>;
+export type TStay = WithoutBase<Stay>;
 
 export type EntityArgs<T extends BaseEntity> = Partial<T> & Omit<BaseEntity, 'id' | 'createdAt' | 'updatedAt'>;

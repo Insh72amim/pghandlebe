@@ -3,7 +3,6 @@ import { BaseEntity } from './base.entity';
 import { TOwner } from '../types/entity.types';
 import { Address } from './address.entity';
 import { PG } from './pg.entity';
-import { ConsoleLogger } from '@nestjs/common';
 
 @Entity({ tableName: 'Owner' })
 export class Owner extends BaseEntity {

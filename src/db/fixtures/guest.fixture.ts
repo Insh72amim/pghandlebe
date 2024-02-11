@@ -1,4 +1,3 @@
-import { Guest } from '../entities/Guest.entity';
 import { faker } from '@faker-js/faker';
 import { generateFakeAddress } from './address.fixture';
 import { generateFakeBed } from './bed.fixture';

@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker';
-import { PG } from '../entities/PG.entity';
 import { generateFakeOwner } from './owner.fixture';
 import { Owner } from '../entities/owner.entity';
 import { Address } from '../entities/address.entity';

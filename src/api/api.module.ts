@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { DappModule } from './random/dapp.module';
+import { AuthModule } from './auth/auth.module';
+import { OwnerModule } from './owner/owner.module';
 
 @Module({
-  imports: [DappModule],
+  imports: [AuthModule, OwnerModule],
   controllers: [],
   providers: [],
 })

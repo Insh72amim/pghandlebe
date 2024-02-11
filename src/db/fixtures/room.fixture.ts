@@ -1,4 +1,3 @@
-import { Room } from '../entities/Room.entity';
 import { faker } from '@faker-js/faker';
 import { generateFakePG } from './pg.fixture';
 import { PG } from '../entities/pg.entity';

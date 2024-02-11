@@ -1,4 +1,3 @@
-import { Bed } from '../entities/Bed.entity';
 import { faker } from '@faker-js/faker';
 import { generateFakeRoom } from './room.fixture';
 import { Room } from '../entities/room.entity';
