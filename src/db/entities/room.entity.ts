@@ -13,7 +13,10 @@ export class Room extends BaseEntity {
   floor!: string;
 
   @Property()
-  block!: number;
+  block!: string;
+
+  @Property()
+  sharing: number;
 
   @Property()
   isAirConditioned!: boolean;

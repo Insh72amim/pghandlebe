@@ -4,6 +4,7 @@ import { Logger } from '@nestjs/common';
 import { CustomMigrationGenerator } from './migrations/custom/custom-migration.generator';
 import { Migrator } from '@mikro-orm/migrations';
 import { EntityGenerator } from '@mikro-orm/entity-generator';
+import { SeedManager } from '@mikro-orm/seeder';
 
 type IOptions = Options & { migrations: MigrationsOptions };
 
@@ -32,7 +33,7 @@ const config: IOptions = {
     disableForeignKeys: false,
     createForeignKeyConstraints: true,
   },
-  extensions: [Migrator, EntityGenerator],
+  extensions: [Migrator, EntityGenerator, SeedManager],
 };
 
 export default config;

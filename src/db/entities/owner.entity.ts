@@ -3,6 +3,7 @@ import { BaseEntity } from './base.entity';
 import { TOwner } from '../types/entity.types';
 import { Address } from './address.entity';
 import { PG } from './pg.entity';
+import { ConsoleLogger } from '@nestjs/common';
 
 @Entity({ tableName: 'Owner' })
 export class Owner extends BaseEntity {
@@ -18,13 +19,13 @@ export class Owner extends BaseEntity {
   @Property()
   mobileNumber!: string;
 
-  @OneToOne(() => Address, { owner: false })
-  address!: Address;
+  @OneToOne(() => Address, { nullable: true })
+  address?: Address;
 
-  @OneToMany(() => PG, (pg) => pg.owner)
+  @OneToMany(() => PG, (pg) => pg.owner, { nullable: true })
   pgs = new Collection<PG>(this);
 
-  constructor(args: TOwner) {
+  constructor({ ...args }: TOwner) {
     super();
     Object.assign(this, args);
   }

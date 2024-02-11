@@ -1,3 +1,4 @@
+import { BaseEntity } from '@mikro-orm/core';
 import { Address } from '../entities/address.entity';
 import { Amenity } from '../entities/amenity.entity';
 import { Bed } from '../entities/bed.entity';
@@ -28,3 +29,5 @@ export type TBed = Omit<Bed, 'id' | 'createdAt' | 'updatedAt' | 'guest' | 'curre
 export type TAddress = Omit<Address, 'id' | 'createdAt' | 'updatedAt'>;
 export type TAmenity = Omit<Amenity, 'id' | 'createdAt' | 'updatedAt'>;
 export type TStay = Omit<Stay, 'id' | 'createdAt' | 'updatedAt'>;
+
+export type EntityArgs<T extends BaseEntity> = Partial<T> & Omit<BaseEntity, 'id' | 'createdAt' | 'updatedAt'>;

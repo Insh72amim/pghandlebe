@@ -4,6 +4,7 @@ import { Owner } from './owner.entity';
 import { TPG } from '../types/entity.types';
 import { Amenity } from './amenity.entity';
 import { Room } from './room.entity';
+import { Address } from './address.entity';
 
 @Entity({ tableName: 'PG' })
 export class PG extends BaseEntity {
@@ -19,11 +20,14 @@ export class PG extends BaseEntity {
   @Property()
   totalRooms!: number;
 
+  @OneToOne(() => Address, { nullable: true })
+  address?: Address;
+
+  @OneToOne(() => Amenity, { nullable: true })
+  amenity?: Amenity;
+
   @ManyToOne(() => Owner)
   owner!: Owner;
-
-  @OneToOne(() => Amenity, { mappedBy: 'pg' })
-  amenity!: Amenity;
 
   @OneToMany(() => Room, (room) => room.pg)
   rooms = new Collection<Room>(this);

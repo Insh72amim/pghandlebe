@@ -1,20 +1,13 @@
-// generateFakeOwner.ts
-import faker from 'faker';
-import { Owner } from '../entities/Owner.entity';
+import { faker } from '@faker-js/faker';
 import { generateFakeAddress } from './address.fixture';
 import { Address } from '../entities/address.entity';
-import { PG } from '../entities/pg.entity';
-import { generateFakePG } from './pg.fixture';
-import { Collection } from '@mikro-orm/core';
 
-export function generateFakeOwner(address: Address = generateFakeAddress()): Owner {
-  const owner: Owner = new Owner({
-    name: faker.name.firstName(),
+export function generateFakeOwner(address = new Address(generateFakeAddress())) {
+  return {
+    name: faker.string.alpha({ length: 10 }),
     email: faker.internet.email(),
     password: faker.internet.password(),
-    mobileNumber: faker.phone.phoneNumber(),
+    mobileNumber: faker.phone.number(),
     address,
-  });
-
-  return owner;
+  };
 }

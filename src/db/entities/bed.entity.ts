@@ -4,7 +4,6 @@ import { TBed } from '../types/entity.types';
 import { Room } from './room.entity';
 import { Guest } from './guest.entity';
 import { Stay } from './stay.entity';
-import { PG } from './pg.entity';
 
 @Entity({ tableName: 'Bed' })
 export class Bed extends BaseEntity {
@@ -17,11 +16,11 @@ export class Bed extends BaseEntity {
   @ManyToOne(() => Room)
   room!: Room;
 
-  @OneToOne(() => Guest, (guest) => guest.bed, { owner: true, mappedBy: 'bed' })
-  guest: Guest;
+  @OneToOne(() => Guest, (guest) => guest.bed, { owner: true, mappedBy: 'bed', nullable: true })
+  guest?: Guest;
 
-  @OneToOne(() => Stay)
-  currentStay: Stay;
+  @OneToOne(() => Stay, { nullable: true })
+  currentStay?: Stay;
 
   constructor(args: TBed) {
     super();

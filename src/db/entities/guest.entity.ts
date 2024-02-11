@@ -16,14 +16,14 @@ export class Guest extends BaseEntity {
   @Property()
   mobileNumber!: string;
 
-  @OneToOne(() => Address)
-  homeAddress!: Address;
+  @OneToOne(() => Address, { nullable: true })
+  address?: Address;
 
   @OneToOne(() => Bed, (bed) => bed.guest, { owner: false })
   bed!: Bed;
 
   @OneToOne(() => Stay, (stay) => stay.guest, { owner: false })
-  stay!: Stay;
+  stay?: Stay;
 
   constructor(args: TGuest) {
     super();

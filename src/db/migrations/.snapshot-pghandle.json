@@ -43,7 +43,7 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "mappedType": "string"
         },
         "identity_id": {
@@ -52,7 +52,7 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "mappedType": "string"
         },
         "address_line1": {
@@ -197,13 +197,13 @@
           "nullable": false,
           "mappedType": "string"
         },
-        "home_address_id": {
-          "name": "home_address_id",
+        "address_id": {
+          "name": "address_id",
           "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "mappedType": "uuid"
         }
       },
@@ -212,10 +212,10 @@
       "indexes": [
         {
           "columnNames": [
-            "home_address_id"
+            "address_id"
           ],
           "composite": false,
-          "keyName": "Guest_home_address_id_unique",
+          "keyName": "Guest_address_id_unique",
           "constraint": true,
           "primary": false,
           "unique": true
@@ -233,16 +233,17 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "Guest_home_address_id_foreign": {
-          "constraintName": "Guest_home_address_id_foreign",
+        "Guest_address_id_foreign": {
+          "constraintName": "Guest_address_id_foreign",
           "columnNames": [
-            "home_address_id"
+            "address_id"
           ],
           "localTableName": "public.Guest",
           "referencedColumnNames": [
             "id"
           ],
           "referencedTableName": "public.Address",
+          "deleteRule": "set null",
           "updateRule": "cascade"
         }
       },
@@ -316,11 +317,30 @@
           "primary": false,
           "nullable": false,
           "mappedType": "string"
+        },
+        "address_id": {
+          "name": "address_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "uuid"
         }
       },
       "name": "Owner",
       "schema": "public",
       "indexes": [
+        {
+          "columnNames": [
+            "address_id"
+          ],
+          "composite": false,
+          "keyName": "Owner_address_id_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
         {
           "keyName": "Owner_pkey",
           "columnNames": [
@@ -333,7 +353,21 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {},
+      "foreignKeys": {
+        "Owner_address_id_foreign": {
+          "constraintName": "Owner_address_id_foreign",
+          "columnNames": [
+            "address_id"
+          ],
+          "localTableName": "public.Owner",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.Address",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     },
     {
@@ -405,6 +439,24 @@
           "nullable": false,
           "mappedType": "integer"
         },
+        "address_id": {
+          "name": "address_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "uuid"
+        },
+        "amenity_id": {
+          "name": "amenity_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "uuid"
+        },
         "owner_id": {
           "name": "owner_id",
           "type": "uuid",
@@ -419,6 +471,26 @@
       "schema": "public",
       "indexes": [
         {
+          "columnNames": [
+            "address_id"
+          ],
+          "composite": false,
+          "keyName": "PG_address_id_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "amenity_id"
+          ],
+          "composite": false,
+          "keyName": "PG_amenity_id_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
           "keyName": "PG_pkey",
           "columnNames": [
             "id"
@@ -431,6 +503,32 @@
       ],
       "checks": [],
       "foreignKeys": {
+        "PG_address_id_foreign": {
+          "constraintName": "PG_address_id_foreign",
+          "columnNames": [
+            "address_id"
+          ],
+          "localTableName": "public.PG",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.Address",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "PG_amenity_id_foreign": {
+          "constraintName": "PG_amenity_id_foreign",
+          "columnNames": [
+            "amenity_id"
+          ],
+          "localTableName": "public.PG",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.Amenity",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
         "PG_owner_id_foreign": {
           "constraintName": "PG_owner_id_foreign",
           "columnNames": [
@@ -673,6 +771,15 @@
         },
         "block": {
           "name": "block",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "sharing": {
+          "name": "sharing",
           "type": "int",
           "unsigned": false,
           "autoincrement": false,
@@ -725,6 +832,162 @@
             "id"
           ],
           "referencedTableName": "public.PG",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "default": "CURRENT_TIMESTAMP",
+          "mappedType": "datetime"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "default": "CURRENT_TIMESTAMP",
+          "mappedType": "datetime"
+        },
+        "is_available": {
+          "name": "is_available",
+          "type": "boolean",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "boolean"
+        },
+        "bed_number": {
+          "name": "bed_number",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "room_id": {
+          "name": "room_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "guest_id": {
+          "name": "guest_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "uuid"
+        },
+        "current_stay_id": {
+          "name": "current_stay_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "uuid"
+        }
+      },
+      "name": "Bed",
+      "schema": "public",
+      "indexes": [
+        {
+          "columnNames": [
+            "guest_id"
+          ],
+          "composite": false,
+          "keyName": "Bed_guest_id_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "current_stay_id"
+          ],
+          "composite": false,
+          "keyName": "Bed_current_stay_id_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "Bed_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "Bed_room_id_foreign": {
+          "constraintName": "Bed_room_id_foreign",
+          "columnNames": [
+            "room_id"
+          ],
+          "localTableName": "public.Bed",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.Room",
+          "updateRule": "cascade"
+        },
+        "Bed_guest_id_foreign": {
+          "constraintName": "Bed_guest_id_foreign",
+          "columnNames": [
+            "guest_id"
+          ],
+          "localTableName": "public.Bed",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.Guest",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "Bed_current_stay_id_foreign": {
+          "constraintName": "Bed_current_stay_id_foreign",
+          "columnNames": [
+            "current_stay_id"
+          ],
+          "localTableName": "public.Bed",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.Stay",
+          "deleteRule": "set null",
           "updateRule": "cascade"
         }
       },
@@ -898,160 +1161,6 @@
             "id"
           ],
           "referencedTableName": "public.Bed",
-          "updateRule": "cascade"
-        }
-      },
-      "nativeEnums": {}
-    },
-    {
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        },
-        "is_available": {
-          "name": "is_available",
-          "type": "boolean",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "boolean"
-        },
-        "bed_number": {
-          "name": "bed_number",
-          "type": "int",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "integer"
-        },
-        "room_id": {
-          "name": "room_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        },
-        "guest_id": {
-          "name": "guest_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        },
-        "current_stay_id": {
-          "name": "current_stay_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        }
-      },
-      "name": "Bed",
-      "schema": "public",
-      "indexes": [
-        {
-          "columnNames": [
-            "guest_id"
-          ],
-          "composite": false,
-          "keyName": "Bed_guest_id_unique",
-          "constraint": true,
-          "primary": false,
-          "unique": true
-        },
-        {
-          "columnNames": [
-            "current_stay_id"
-          ],
-          "composite": false,
-          "keyName": "Bed_current_stay_id_unique",
-          "constraint": true,
-          "primary": false,
-          "unique": true
-        },
-        {
-          "keyName": "Bed_pkey",
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": true,
-          "primary": true,
-          "unique": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {
-        "Bed_room_id_foreign": {
-          "constraintName": "Bed_room_id_foreign",
-          "columnNames": [
-            "room_id"
-          ],
-          "localTableName": "public.Bed",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.Room",
-          "updateRule": "cascade"
-        },
-        "Bed_guest_id_foreign": {
-          "constraintName": "Bed_guest_id_foreign",
-          "columnNames": [
-            "guest_id"
-          ],
-          "localTableName": "public.Bed",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.Guest",
-          "updateRule": "cascade"
-        },
-        "Bed_current_stay_id_foreign": {
-          "constraintName": "Bed_current_stay_id_foreign",
-          "columnNames": [
-            "current_stay_id"
-          ],
-          "localTableName": "public.Bed",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.Stay",
           "updateRule": "cascade"
         }
       },

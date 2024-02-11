@@ -1,10 +1,10 @@
 import { Amenity } from '../entities/Amenity.entity';
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import { generateFakePG } from './pg.fixture';
 import { PG } from '../entities/pg.entity';
 
-export function generateFakeAmenity(pg: PG = generateFakePG()): Amenity {
-  const amenity: Amenity = new Amenity({
+export function generateFakeAmenity(pg: PG = new PG(generateFakePG())) {
+  return {
     pg,
     gym: faker.datatype.boolean(),
     food: faker.datatype.boolean(),
@@ -16,7 +16,5 @@ export function generateFakeAmenity(pg: PG = generateFakePG()): Amenity {
     swimmingPool: faker.datatype.boolean(),
     bikeParking: faker.datatype.boolean(),
     carParking: faker.datatype.boolean(),
-  });
-
-  return amenity;
+  };
 }
