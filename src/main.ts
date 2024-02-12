@@ -4,11 +4,13 @@ import { NestFactory } from '@nestjs/core';
 import { json, urlencoded } from 'express';
 import { AppModule } from './app.module';
 import { match, P } from 'ts-pattern';
+import { Logger } from 'nestjs-pino';
 
 export const createServer = async () => {
   const options = { bufferLogs: true };
   const app = await NestFactory.create(AppModule, options);
 
+  //app.useLogger(app.get(Logger));
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: ['1'],

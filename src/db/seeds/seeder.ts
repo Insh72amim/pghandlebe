@@ -44,14 +44,14 @@ async function seedOneSetData(em: EntityManager) {
   const beds: Bed[] = [];
   rooms.forEach((room) => {
     for (let i = 0; i < room.sharing; i++) {
-      beds.push(em.create(Bed, generateFakeBed(room)));
+      beds.push(em.create(Bed, generateFakeBed(room.pg, room)));
     }
   });
 
   // add guest to all the beds in room
   const guests: Guest[] = [];
   beds.forEach((bed) => {
-    guests.push(em.create(Guest, generateFakeGuest(em.create(Address, generateFakeAddress()), bed)));
+    guests.push(em.create(Guest, generateFakeGuest(em.create(Address, generateFakeAddress()), bed, bed.room.pg)));
   });
 
   // create a stay for their time

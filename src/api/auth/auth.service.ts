@@ -3,7 +3,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Owner } from 'src/db/entities/owner.entity';
 import { TOwner } from 'src/db/types/entity.types';
-import { ErrorDTO } from 'src/dtos/error.dto';
+import { ErrorDTO } from 'src/lib/dtos/error.dto';
 
 @Injectable()
 export class AuthService {

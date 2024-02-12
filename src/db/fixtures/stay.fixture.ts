@@ -12,6 +12,7 @@ export function generateFakeStay(guest: Guest = new Guest(generateFakeGuest()), 
     latestPaymentDate: faker.date.future(),
     isActive: faker.datatype.boolean(),
     reccuringDaysForPayment: faker.number.int({ min: 7, max: 30 }),
+    rentPerMonth: faker.number.int({ min: 5000, max: 15000 }),
     guest,
     bed,
   };
