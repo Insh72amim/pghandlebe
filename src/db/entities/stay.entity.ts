@@ -19,7 +19,10 @@ export class Stay extends BaseEntity {
   latestPaymentDate: Date;
 
   @Property()
-  isActive: boolean;
+  isActive!: boolean;
+
+  @Property()
+  rentPerMonth!: number;
 
   @Property()
   reccuringDaysForPayment: number;

@@ -188,118 +188,6 @@
           "nullable": false,
           "mappedType": "string"
         },
-        "mobile_number": {
-          "name": "mobile_number",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "string"
-        },
-        "address_id": {
-          "name": "address_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "mappedType": "uuid"
-        }
-      },
-      "name": "Guest",
-      "schema": "public",
-      "indexes": [
-        {
-          "columnNames": [
-            "address_id"
-          ],
-          "composite": false,
-          "keyName": "Guest_address_id_unique",
-          "constraint": true,
-          "primary": false,
-          "unique": true
-        },
-        {
-          "keyName": "Guest_pkey",
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": true,
-          "primary": true,
-          "unique": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {
-        "Guest_address_id_foreign": {
-          "constraintName": "Guest_address_id_foreign",
-          "columnNames": [
-            "address_id"
-          ],
-          "localTableName": "public.Guest",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.Address",
-          "deleteRule": "set null",
-          "updateRule": "cascade"
-        }
-      },
-      "nativeEnums": {}
-    },
-    {
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "string"
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "string"
-        },
         "password": {
           "name": "password",
           "type": "varchar(255)",
@@ -539,6 +427,139 @@
             "id"
           ],
           "referencedTableName": "public.Owner",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "default": "CURRENT_TIMESTAMP",
+          "mappedType": "datetime"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "default": "CURRENT_TIMESTAMP",
+          "mappedType": "datetime"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "mobile_number": {
+          "name": "mobile_number",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "pg_id": {
+          "name": "pg_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "address_id": {
+          "name": "address_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "uuid"
+        }
+      },
+      "name": "Guest",
+      "schema": "public",
+      "indexes": [
+        {
+          "columnNames": [
+            "address_id"
+          ],
+          "composite": false,
+          "keyName": "Guest_address_id_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "Guest_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "Guest_pg_id_foreign": {
+          "constraintName": "Guest_pg_id_foreign",
+          "columnNames": [
+            "pg_id"
+          ],
+          "localTableName": "public.Guest",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.PG",
+          "updateRule": "cascade"
+        },
+        "Guest_address_id_foreign": {
+          "constraintName": "Guest_address_id_foreign",
+          "columnNames": [
+            "address_id"
+          ],
+          "localTableName": "public.Guest",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.Address",
+          "deleteRule": "set null",
           "updateRule": "cascade"
         }
       },
@@ -897,6 +918,15 @@
           "nullable": false,
           "mappedType": "uuid"
         },
+        "pg_id": {
+          "name": "pg_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
         "guest_id": {
           "name": "guest_id",
           "type": "uuid",
@@ -962,6 +992,18 @@
             "id"
           ],
           "referencedTableName": "public.Room",
+          "updateRule": "cascade"
+        },
+        "Bed_pg_id_foreign": {
+          "constraintName": "Bed_pg_id_foreign",
+          "columnNames": [
+            "pg_id"
+          ],
+          "localTableName": "public.Bed",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.PG",
           "updateRule": "cascade"
         },
         "Bed_guest_id_foreign": {
@@ -1074,6 +1116,15 @@
           "primary": false,
           "nullable": false,
           "mappedType": "boolean"
+        },
+        "rent_per_month": {
+          "name": "rent_per_month",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
         },
         "reccuring_days_for_payment": {
           "name": "reccuring_days_for_payment",
