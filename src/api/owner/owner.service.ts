@@ -1,5 +1,5 @@
 import { EntityManager, NotFoundError } from '@mikro-orm/postgresql';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { Owner } from 'src/db/entities/owner.entity';
 import { PG } from 'src/db/entities/pg.entity';

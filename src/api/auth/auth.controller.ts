@@ -3,7 +3,9 @@ import { AuthService } from './auth.service';
 import { TOwner } from 'src/db/types/entity.types';
 import { Owner } from 'src/db/entities/owner.entity';
 import { ErrorDTO } from 'src/lib/dtos/error.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

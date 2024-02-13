@@ -2,7 +2,9 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { OwnerService } from './owner.service';
 import { Owner } from 'src/db/entities/owner.entity';
 import { PG } from 'src/db/entities/pg.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Owner')
 @Controller('owner')
 export class OwnerController {
   constructor(private readonly ownerService: OwnerService) {}
