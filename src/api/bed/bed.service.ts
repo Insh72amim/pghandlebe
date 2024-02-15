@@ -1,20 +1,24 @@
 import { EntityManager, NotFoundError } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
-import { Address } from 'src/db/entities/address.entity';
-import { Amenity } from 'src/db/entities/amenity.entity';
 import { Bed } from 'src/db/entities/bed.entity';
 import { Guest } from 'src/db/entities/guest.entity';
 
 import { PG } from 'src/db/entities/pg.entity';
 import { Room } from 'src/db/entities/room.entity';
-import { TPG } from 'src/db/types/entity.types';
+import { TBed } from 'src/db/types/entity.types';
 
 @Injectable()
-export class PgService {
+export class BedService {
   constructor(private readonly entityManager: EntityManager) {}
 
-  async getPgById(id: string): Promise<PG> {
-    return this.entityManager.findOneOrFail(PG, id, { populate: ['address', 'amenity'] });
+  async addBed(bed: TBed): Promise<Bed> {
+    const room = await this.entityManager.findOneOrFail(Room, bed.room);
+    const pg = await this.entityManager.findOneOrFail(PG, bed.pg);
+    return this.entityManager.create(Bed, { isAvailable: true, room, pg });
+  }
+
+  async getBedById(id: string): Promise<Bed> {
+    return this.entityManager.findOneOrFail(Bed, id, { populate: ['room'] });
   }
 
   async getAllRoomsOfPG(id: string): Promise<Room[]> {
@@ -35,17 +39,5 @@ export class PgService {
     const guests = await this.entityManager.find(Guest, { bed: { pg: id } }, { populate: ['stay', 'address', 'bed'] });
     if (guests.length == 0) throw new NotFoundError(`Owner with ID ${id} has No PG`);
     return guests;
-  }
-
-  async addPg(pg: TPG): Promise<PG> {
-    const amenity = this.entityManager.create(Amenity, pg.amenity);
-    const address = this.entityManager.create(Address, pg.address);
-    pg.amenity = amenity;
-    pg.address = address;
-    const newPg = this.entityManager.create(PG, pg);
-    this.entityManager.persistAndFlush(address);
-    this.entityManager.persistAndFlush(amenity);
-    this.entityManager.persistAndFlush(newPg);
-    return newPg;
   }
 }

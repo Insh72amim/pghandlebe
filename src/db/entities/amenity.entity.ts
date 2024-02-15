@@ -7,9 +7,6 @@ import { PG } from './pg.entity';
 
 @Entity({ tableName: 'Amenity' })
 export class Amenity extends BaseEntity {
-  @OneToOne(() => PG)
-  pg!: PG;
-
   @Property()
   food: boolean;
 

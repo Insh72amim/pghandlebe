@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, OneToMany, OneToOne, Property } from '@mikro-orm/core';
+import { Entity, ManyToOne, OneToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
 import { TBed } from '../types/entity.types';
 import { Room } from './room.entity';
@@ -8,8 +8,8 @@ import { PG } from './pg.entity';
 
 @Entity({ tableName: 'Bed' })
 export class Bed extends BaseEntity {
-  @Property()
-  isAvailable!: boolean;
+  @Property({ default: true })
+  isAvailable: boolean;
 
   @Property()
   bedNumber!: number;
