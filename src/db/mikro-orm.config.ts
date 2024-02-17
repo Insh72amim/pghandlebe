@@ -15,14 +15,14 @@ const config: IOptions = {
   entitiesTs: ['./src/**/*.entity.ts'],
   clientUrl: process.env.DB_URL,
   driver: PostgreSqlDriver,
-  // required for ssl certificate for connecting to aws from local
-  // driverOptions: {
-  //   connection: {
-  //     ssl: {
-  //       ca: fs.readFileSync('./certs/global-bundle.pem', 'utf-8'),
-  //     },
-  //   },
-  // },
+  //required for ssl certificate for connecting to aws from local
+  driverOptions: {
+    connection: {
+      ssl: {
+        ca: fs.readFileSync('./certs/global-bundle.pem', 'utf-8'),
+      },
+    },
+  },
   debug: process.env.LOG_LEVEL === 'debug',
   logger: (msg) => new Logger('MikroORM').log(msg),
   highlighter: process.env.LOG_FORMAT === 'pretty' ? new SqlHighlighter() : undefined,

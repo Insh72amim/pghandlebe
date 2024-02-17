@@ -6,9 +6,10 @@ import { BedModule } from './bed/bed.module';
 import { GuestModule } from './guest/guest.module';
 import { RoomModule } from './room/room.module';
 import { StayModule } from './stay/stay.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
-  imports: [AuthModule, BedModule, GuestModule, OwnerModule, PgModule, RoomModule, StayModule],
+  imports: [AuthModule, BedModule, GuestModule, OwnerModule, PgModule, RoomModule, StayModule, HealthModule],
   controllers: [],
   providers: [],
 })
