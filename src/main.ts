@@ -27,6 +27,7 @@ export const createServer = async () => {
   app.use(urlencoded({ extended: true }));
 
   app.enableShutdownHooks();
+  app.enableCors();
 
   return app;
 };
@@ -39,7 +40,7 @@ async function main(): Promise<void> {
     .otherwise(() => 3000);
 
   await app.listen(port);
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}/docs`);
 }
 
 void main();
