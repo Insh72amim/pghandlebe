@@ -51,6 +51,8 @@
     "postgresql": "^0.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
+    "swagger-themes": "^1.4.3",
+    "swagger-ui-themes": "^3.0.1",
     "ts-pattern": "^5.0.6",
     "uuid": "^9.0.1"
   },

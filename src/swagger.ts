@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerCustomOptions, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes';
 
 export const initializeSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -16,8 +17,10 @@ export const initializeSwagger = (app: INestApplication) => {
 
   const document = SwaggerModule.createDocument(app, config, options);
 
+  const darktheme = new SwaggerTheme().getBuffer(SwaggerThemeNameEnum.ONE_DARK);
   const expressOptions: SwaggerCustomOptions = {
     customSiteTitle: 'PG Handle',
+    customCss: darktheme,
   };
 
   SwaggerModule.setup('docs', app, document, expressOptions);
