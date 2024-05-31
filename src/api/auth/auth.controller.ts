@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { TOwner } from 'src/db/types/entity.types';
+import { AcessToken, TokenVerifyResponse, TOwner } from 'src/db/types/entity.types';
 import { Owner } from 'src/db/entities/owner.entity';
 import { ErrorDTO } from 'src/lib/dtos/error.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -18,5 +18,10 @@ export class AuthController {
   @Post('signin')
   signin(@Body() Owner: TOwner): Promise<Owner | ErrorDTO> {
     return this.authService.signin(Owner);
+  }
+
+  @Post('verify')
+  verify(@Body() token: AcessToken): Promise<TokenVerifyResponse | ErrorDTO> {
+    return this.authService.verifyToken(token);
   }
 }

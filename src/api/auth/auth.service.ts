@@ -1,8 +1,9 @@
 import { EntityManager } from '@mikro-orm/postgresql';
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Token } from '@mikro-orm/sql-highlighter';
+import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Owner } from 'src/db/entities/owner.entity';
-import { TOwner } from 'src/db/types/entity.types';
+import { AcessToken, TokenVerifyResponse, TOwner } from 'src/db/types/entity.types';
 import { ErrorDTO } from 'src/lib/dtos/error.dto';
 
 @Injectable()
@@ -41,6 +42,23 @@ export class AuthService {
     }
   }
 
+  async verifyToken({ access_token }: AcessToken): Promise<TokenVerifyResponse | ErrorDTO> {
+    try {
+      const decoded = await this.jwtSerice.verifyAsync(access_token, { secret: process.env.JWT_SECRET });
+
+      return {
+        valid: true,
+        decoded,
+      };
+    } catch (error) {
+      return {
+        status: HttpStatus.UNAUTHORIZED,
+        message: 'Not Authorized',
+        error: error,
+      };
+    }
+  }
+
   async generateJwt(owner: Owner): Promise<string> {
     const payload = {
       sub: owner.id,
@@ -49,7 +67,7 @@ export class AuthService {
     };
 
     return await this.jwtSerice.signAsync(payload, {
-      expiresIn: '100m',
+      expiresIn: '6h',
       secret: process.env.JWT_SECRET,
     });
   }

@@ -10,6 +10,13 @@ export const createServer = async () => {
   const options = { bufferLogs: true };
   const app = await NestFactory.create(AppModule, options);
 
+  app.enableCors({
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
+    credentials: true,
+  });
+
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: ['1'],
@@ -27,7 +34,6 @@ export const createServer = async () => {
   app.use(urlencoded({ extended: true }));
 
   app.enableShutdownHooks();
-  app.enableCors();
 
   return app;
 };

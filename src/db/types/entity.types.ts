@@ -33,3 +33,18 @@ export type TAmenity = WithoutBase<Amenity>;
 export type TStay = WithoutBase<Stay>;
 
 export type EntityArgs<T extends BaseEntity> = Partial<T> & Omit<BaseEntity, 'id' | 'createdAt' | 'updatedAt'>;
+
+export interface AcessToken {
+  access_token: string;
+}
+
+export interface TokenVerifyResponse {
+  valid: boolean;
+  decoded: {
+    sub: string;
+    name: string;
+    email: string;
+    iat: number;
+    exp: number;
+  };
+}
