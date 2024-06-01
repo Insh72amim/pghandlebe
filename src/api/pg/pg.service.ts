@@ -28,14 +28,11 @@ export class PgService {
     const beds = available
       ? await this.entityManager.find(Bed, { pg: id, isAvailable: true }, { populate: ['guest', 'room'] })
       : await this.entityManager.find(Bed, { pg: id }, { populate: ['guest', 'room'] });
-    if (beds.length == 0) throw new NotFoundError(`PG with ID ${id} has no beds`);
     return beds;
   }
 
   async getAllGuestsOfPG(id: string): Promise<Guest[]> {
-    const guests = await this.entityManager.find(Guest, { bed: { pg: id } }, { populate: ['stay', 'address', 'bed'] });
-    if (guests.length == 0) throw new NotFoundError(`Owner with ID ${id} has No PG`);
-    return guests;
+    return await this.entityManager.find(Guest, { bed: { pg: id } }, { populate: ['stay', 'address', 'bed'] });
   }
 
   async addPg(pg: PgDTO): Promise<PG> {
