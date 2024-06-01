@@ -6,8 +6,8 @@ import { Bed } from 'src/db/entities/bed.entity';
 import { Guest } from 'src/db/entities/guest.entity';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Guest')
-@Controller('guest')
+@ApiTags('4. Room')
+@Controller('room')
 export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 

@@ -6,11 +6,17 @@ import { Bed } from 'src/db/entities/bed.entity';
 import { Guest } from 'src/db/entities/guest.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { TPG } from 'src/db/types/entity.types';
+import { PgDTO } from 'src/lib/dtos/request/pg.request.dto';
 
-@ApiTags('PG')
+@ApiTags('3. PG')
 @Controller('pg')
 export class PgController {
   constructor(private readonly pgService: PgService) {}
+
+  @Post()
+  async addPg(@Body() pg: PgDTO): Promise<PG> {
+    return await this.pgService.addPg(pg);
+  }
 
   @Get('/:id')
   async getPgById(@Param('id') id: string): Promise<PG> {
@@ -30,10 +36,5 @@ export class PgController {
   @Get('/:id/guests')
   async getAllGuestsOfPG(@Param('id') id: string): Promise<Guest[]> {
     return await this.pgService.getAllGuestsOfPG(id);
-  }
-
-  @Post()
-  async addPg(@Body() pg: TPG): Promise<PG> {
-    return await this.pgService.addPg(pg);
   }
 }

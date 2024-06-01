@@ -4,7 +4,7 @@ import { Owner } from 'src/db/entities/owner.entity';
 import { PG } from 'src/db/entities/pg.entity';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Owner')
+@ApiTags('2. Owner')
 @Controller('owner')
 export class OwnerController {
   constructor(private readonly ownerService: OwnerService) {}

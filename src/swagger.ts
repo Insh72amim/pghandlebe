@@ -21,6 +21,9 @@ export const initializeSwagger = (app: INestApplication) => {
   const expressOptions: SwaggerCustomOptions = {
     customSiteTitle: 'PG Handle',
     customCss: darktheme,
+    swaggerOptions: {
+      tagsSorter: 'alpha',
+    },
   };
 
   SwaggerModule.setup('docs', app, document, expressOptions);

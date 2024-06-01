@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Owner } from 'src/db/entities/owner.entity';
 import { AcessToken, TokenVerifyResponse, TOwner } from 'src/db/types/entity.types';
 import { ErrorDTO } from 'src/lib/dtos/error.dto';
+import { OwnerSignInRequestDTO, OwnerSignUpRequestDTO } from 'src/lib/dtos/request/auth.request.dto';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
     private readonly jwtSerice: JwtService,
   ) {}
 
-  async signup(owner: TOwner): Promise<Owner | ErrorDTO> {
+  async signup(owner: OwnerSignUpRequestDTO): Promise<Owner | ErrorDTO> {
     try {
       const newOwner = this.em.create(Owner, owner);
       await this.em.persistAndFlush(newOwner);
@@ -27,7 +28,7 @@ export class AuthService {
     }
   }
 
-  async signin(owner: TOwner): Promise<(Owner & { access_token: string }) | ErrorDTO> {
+  async signin(owner: OwnerSignInRequestDTO): Promise<(Owner & { access_token: string }) | ErrorDTO> {
     try {
       const ownerEntity = await this.em.findOne(Owner, { email: owner.email, password: owner.password });
       const access_token = await this.generateJwt(ownerEntity);

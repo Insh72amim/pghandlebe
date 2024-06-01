@@ -6,7 +6,7 @@ import { Bed } from 'src/db/entities/bed.entity';
 import { Guest } from 'src/db/entities/guest.entity';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Stay')
+@ApiTags('7. Stay')
 @Controller('stay')
 export class StayController {
   constructor(private readonly stayService: StayService) {}

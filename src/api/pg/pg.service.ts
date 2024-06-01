@@ -1,5 +1,5 @@
 import { EntityManager, NotFoundError } from '@mikro-orm/postgresql';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Address } from 'src/db/entities/address.entity';
 import { Amenity } from 'src/db/entities/amenity.entity';
 import { Bed } from 'src/db/entities/bed.entity';
@@ -8,6 +8,7 @@ import { Guest } from 'src/db/entities/guest.entity';
 import { PG } from 'src/db/entities/pg.entity';
 import { Room } from 'src/db/entities/room.entity';
 import { TPG } from 'src/db/types/entity.types';
+import { PgDTO } from 'src/lib/dtos/request/pg.request.dto';
 
 @Injectable()
 export class PgService {
@@ -37,15 +38,20 @@ export class PgService {
     return guests;
   }
 
-  async addPg(pg: TPG): Promise<PG> {
-    const amenity = this.entityManager.create(Amenity, pg.amenity);
-    const address = this.entityManager.create(Address, pg.address);
-    pg.amenity = amenity;
-    pg.address = address;
-    const newPg = this.entityManager.create(PG, pg);
-    this.entityManager.persistAndFlush(address);
-    this.entityManager.persistAndFlush(amenity);
-    this.entityManager.persistAndFlush(newPg);
-    return newPg;
+  async addPg(pg: PgDTO): Promise<PG> {
+    try {
+      const amenity = this.entityManager.create(Amenity, pg.amenity);
+      const address = this.entityManager.create(Address, pg.address);
+      pg.amenity = amenity;
+      pg.address = address;
+      const newPg = this.entityManager.create(PG, pg);
+      this.entityManager.persistAndFlush(address);
+      this.entityManager.persistAndFlush(amenity);
+      this.entityManager.persistAndFlush(newPg);
+      return newPg;
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Error while adding PG');
+    }
   }
 }

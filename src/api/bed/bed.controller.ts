@@ -6,7 +6,7 @@ import { Guest } from 'src/db/entities/guest.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { TBed } from 'src/db/types/entity.types';
 
-@ApiTags('Bed')
+@ApiTags('5. Bed')
 @Controller('bed')
 export class BedController {
   constructor(private readonly bedService: BedService) {}
