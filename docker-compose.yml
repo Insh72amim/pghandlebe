@@ -7,4 +7,19 @@ services:
       - POSTGRES_PASSWORD=syedamim9876
       - POSTGRES_DB=pghandle
     ports:
-      - 5112:5432
+      - "5112:5432" # Expose port 5432 internally and map to 5112 externally
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  app:
+    build: .
+    ports:
+      - "5647:5647"
+    environment:
+      DB_URL: postgres://syedamim:syedamim9876@db:5432/pghandle
+      PORT: 5647
+      JWT_SECRET: haufjaksfjlkfajslduflajsdlkfj
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:

@@ -9,6 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:local": "nest start",
+    "start:app": "docker-compose up --build -d ",
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "db:create-migration": "mikro-orm migration:create",
